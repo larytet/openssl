@@ -1,0 +1,10 @@
+CYREN_INSTALL_HEADERS(srp.h PREFIX openssl)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    srp_lib.c
+    srp_vfy.c
+    PARENT_SCOPE)
+
+OPENSSL_ADD_CRYPTO_TESTS(
+    srptest.c
+    PARENT_SCOPE)

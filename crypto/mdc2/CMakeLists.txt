@@ -1,0 +1,10 @@
+CYREN_INSTALL_HEADERS(mdc2.h PREFIX openssl)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    mdc2dgst.c
+    mdc2_one.c
+    PARENT_SCOPE)
+
+OPENSSL_ADD_CRYPTO_TESTS(
+    mdc2test.c
+    PARENT_SCOPE)

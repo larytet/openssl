@@ -1,0 +1,5 @@
+CYREN_INSTALL_HEADERS(stack.h safestack.h PREFIX openssl)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    stack.c
+    PARENT_SCOPE)

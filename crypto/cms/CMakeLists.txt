@@ -1,0 +1,19 @@
+CYREN_INSTALL_HEADERS(cms.h PREFIX openssl)
+CYREN_INSTALL_HEADERS(cms_lcl.h INTERNAL)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    cms_lib.c
+    cms_asn1.c
+    cms_att.c
+    cms_io.c
+    cms_smime.c
+    cms_err.c
+    cms_sd.c
+    cms_dd.c
+    cms_cd.c
+    cms_env.c
+    cms_enc.c
+    cms_ess.c
+    cms_pwri.c
+    cms_kari.c
+    PARENT_SCOPE)

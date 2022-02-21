@@ -1,0 +1,32 @@
+CYREN_INSTALL_HEADERS(blowfish.h PREFIX openssl)
+CYREN_INSTALL_HEADERS(bf_pi.h bf_locl.h INTERNAL)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    bf_skey.c
+    bf_ecb.c
+    bf_cfb64.c
+    bf_ofb64.c
+    PARENT_SCOPE)
+
+IF(CYREN_ARCH_IS_AMD64)
+    OPENSSL_ADD_CRYPTO_SOURCES(
+        bf_enc.c
+        PARENT_SCOPE)
+
+ELSEIF(CYREN_ARCH_IS_I386)
+    OPENSSL_ADD_CRYPTO_SOURCES(
+        asm/bf-586.pl
+        PARENT_SCOPE PERLASM)
+
+ELSEIF(CYREN_ARCH_IS_PPC OR CYREN_ARCH_IS_PPC64)
+    OPENSSL_ADD_CRYPTO_SOURCES(
+        bf_enc.c
+        PARENT_SCOPE)
+
+ELSE()
+    MESSAGE(FATAL_ERROR "Unknown architecture")
+ENDIF()
+
+OPENSSL_ADD_CRYPTO_TESTS(
+    bftest.c
+    PARENT_SCOPE)

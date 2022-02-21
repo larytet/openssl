@@ -1,0 +1,5 @@
+CYREN_INSTALL_HEADERS(txt_db.h PREFIX openssl)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    txt_db.c
+    PARENT_SCOPE)

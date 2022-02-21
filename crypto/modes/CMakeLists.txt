@@ -1,0 +1,43 @@
+CYREN_INSTALL_HEADERS(modes.h PREFIX openssl)
+CYREN_INSTALL_HEADERS(modes_lcl.h INTERNAL)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    cbc128.c
+    ctr128.c
+    cts128.c
+    cfb128.c
+    ofb128.c
+    gcm128.c
+    ccm128.c
+    xts128.c
+    wrap128.c
+    PARENT_SCOPE)
+
+IF(CYREN_ARCH_IS_AMD64)
+    OPENSSL_ADD_CRYPTO_SOURCES(
+        asm/aesni-gcm-x86_64.pl
+        asm/ghash-x86_64.pl
+        PARENT_SCOPE PERLASM)
+
+    OPENSSL_ADD_CRYPTO_DEFINITIONS(
+        -DGHASH_ASM
+        PARENT_SCOPE)
+
+ELSEIF(CYREN_ARCH_IS_I386)
+    OPENSSL_ADD_CRYPTO_SOURCES(
+        asm/ghash-x86.pl
+        PARENT_SCOPE PERLASM)
+
+    OPENSSL_ADD_CRYPTO_DEFINITIONS(
+        -DGHASH_ASM
+        PARENT_SCOPE)
+
+ELSEIF(CYREN_ARCH_IS_PPC OR CYREN_ARCH_IS_PPC64)
+    OPENSSL_ADD_CRYPTO_SOURCES(
+        asm/ghashp8-ppc.pl
+        PARENT_SCOPE PERLASM)
+
+ELSE()
+    MESSAGE(FATAL_ERROR "Unknown architecture")
+ENDIF()
+

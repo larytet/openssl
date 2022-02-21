@@ -1,0 +1,5 @@
+CYREN_INSTALL_HEADERS(krb5_asn.h PREFIX openssl)
+
+OPENSSL_ADD_CRYPTO_SOURCES(
+    krb5_asn.c
+    PARENT_SCOPE)
